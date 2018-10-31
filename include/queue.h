@@ -1,56 +1,51 @@
 /*
- * basic queue
+ * basic FIFO queue
  * the queue can be used in single-thread program.
  * if used in multi-thread program, must be  ensure 
  * thread safety by other methods.
  */
 #ifndef DSA_QUEUE_H
 #define DSA_QUEUE_H
-#define T Queue_T
 
-typedef T *Q;
-typedef void *QNODE;
+extern struct QueueRecord;
+typedef struct QueueRecord *Queue;
+typedef void *Qnode;
 
-struct T 
-{
-	int head;
-	int tail;
-	QNODE data[];
-};
 
 /*
  * initialize the queue
  * the initial capacity is 2 << DEF_BASE
  */
-Q init();
+Queue init();
 
 /*
  * free the space of the queue
  */
-void destroy(Q queue);
+void destroy(Queue queue);
 
 /*
  * enqueue a data to the queue
  */
-void  enqueue(Q queue, QNODE p);
+void  enqueue(Queue queue, Qnode p);
 
 /*
  * dequeue a data from the queue
  */
-QNODE dequeue(Q queue);
+Qnode dequeue(Queue queue);
 
 /* 
  * get the first data of the queue
  */
-QNODE front(Q queue);
+Qnode front(Queue queue);
 
 /*
  * get the size of the queue
  */
-int   size(Q queue);
+int   size(Queue queue);
+
+int isempty(Queue queue);
 
 // static void expand(void *Q);
 // static void reduct(void *Q);
 
-#undef T
 #endif
